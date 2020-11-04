@@ -24,12 +24,22 @@
                 "Ricardo Benjamin Viramontes Juárez" => array(45, 70, 69, 100, 87, 55),
             );
 
-            function promedioGrupalGeneral() {
+            function promedioGrupalGeneral($vectorDePromedios) {
 
+                echo "<br><br> ------------------ Promedio general del grupo ------------------ <br>";
+
+                $promedio = 0;
+                
+                foreach ($vectorDePromedios as $value) {
+                    $promedio = $promedio + $value;
+                }
+                echo "<br>El promedio general del grupo es: ".$promedio/count($vectorDePromedios);
             }
 
             function promedioAlumno($vector_promedios) {
                 $promedio = 0;
+                $vectorPromedio = [];
+                $indice = 0;
                 echo " ------------------ Promedio por Alumno ------------------ <br>";
 
                 foreach ($vector_promedios as $nombre => $calif) {
@@ -38,8 +48,10 @@
                         $promedio = $promedio + $c; 
                     }
                     echo $promedio/6;
+                    $vectorPromedio[$indice+=1] = $promedio/6;
                     $promedio = 0;
                 }
+                return $vectorPromedio;
             }
 
             function promedioMateria($vector_promedios) {
@@ -48,7 +60,7 @@
 
                 $materia = 0;
                 foreach ($vector_promedios as $nombre => $calif) {
-                    echo "<br>Materia ".$materia+1.": ";
+                    echo "<br>Materia ".$materia.": ";
                     foreach ($calif as $c) {
                         $promedio = $promedio + $c; 
                     }
@@ -65,7 +77,9 @@
                 
             }
 
-            promedioAlumno($vector_promedios);
+            //promedioAlumno($vector_promedios);
+
+            promedioGrupalGeneral(promedioAlumno($vector_promedios));
 
 
         ?>
