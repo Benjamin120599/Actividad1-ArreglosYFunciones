@@ -122,17 +122,13 @@
 
                 echo "<br><br> Número de alumnos con promedio superior: ".$count."<br>";
 
-
             }
-
-            //promedioAlumno($vector_promedios);
 
             promedioSuperior(promedioGrupalGeneral(promedioAlumno($vector_promedios)), $vector_promedios);
 
             promedioMateria($vector_promedios);
 
             mejorPromedioAlumno($vector_promedios);
-
 
         ?>
     </body>
