@@ -15,13 +15,13 @@
 
                 "Cristofer Casas Murillo" => array(100, 95, 100, 100, 80, 93),
 
-                "Adriana de Jesús Márquez Mendoza" => array(90, 89, 93, 100, 70, 91),
+                "Adriana de Jesús Márquez Mendoza" => array(90, 89, 93, 99, 70, 91),
 
                 "Abraham Ríos Rivera" => array(100, 78, 90, 89, 97, 92),
 
                 "Guadalupe Vázquez de la Torre" => array(100, 100, 100, 100, 99, 100),
 
-                "Ricardo Benjamin Viramontes Juárez" => array(45, 70, 69, 100, 87, 55),
+                "Ricardo Benjamin Viramontes Juárez" => array(45, 70, 69, 80, 87, 55),
             );
 
             function promedioGrupalGeneral($vectorDePromedios) {
@@ -41,14 +41,21 @@
                 $promedio = 0;
                 $vectorPromedio = [];
                 $indice = 0;
-                echo " ------------------ Promedio por Alumno ------------------ <br>";
+                $i = 1;
+                echo "<br> ------------------ Promedio por Alumno ------------------ <br>";
 
                 foreach ($vector_promedios as $nombre => $calif) {
-                    echo "<br>".$nombre." -- Promedio: ";
+                    echo "<br>".$nombre;
                     foreach ($calif as $c) {
+                        echo "<br>Calificacion materia ".$i;
+                        echo ": ".$c;
                         $promedio = $promedio + $c; 
+                        $i += 1;
                     }
+                    $i = 1;
+                    echo "<br>Promedio: ";
                     echo $promedio/6;
+                    echo "<br>";
                     $vectorPromedio[$indice+=1] = $promedio/6;
                     $promedio = 0;
                 }
@@ -58,7 +65,7 @@
             function promedioMateria($vector_promedios) {
                 $promedio = 0;
                 $indice = 0;
-                echo "<br> ------------------ Promedio por Materia ------------------ <br>";
+                echo "<br><br> ------------------ Promedio por Materia ------------------ <br>";
 
                 for($i=1; $i<=6; $i++) {
 
@@ -74,15 +81,30 @@
 
             }
 
-            function mejorPromedioAlumno() {
-                
+            function mejorPromedioAlumno($vector) {
+                $mejorPromedio = 0;
+                echo "<br><br> ------------------ Mejor Promedio por Alumno ------------------ <br>";
+
+                foreach ($vector as $nombre => $calif) {
+                    echo "<br>".$nombre;
+                    foreach ($calif as $c) {
+                        if($c >= $mejorPromedio) {
+                            $mejorPromedio = $c;
+                        }
+                    }
+                    $i = 0;
+                    echo "<br> Mejor Promedio: ";
+                    echo $mejorPromedio;
+                    echo "<br>";
+                    $mejorPromedio = 0;
+                }
             }
 
             function promedioSuperior($promedioGeneral, $vector) {
                 $count = 0;
                 $indice = 1;
                 $promedio = 0;
-                echo "<br> ------------------ Número de Alumnos con Promedio Superior al General ------------------ <br>";
+                echo "<br><br> ------------------ Número de Alumnos con Promedio Superior al General ------------------ <br>";
                 echo "<br>Promedio General: ".$promedioGeneral;
 
                 foreach ($vector as $nombre => $calif) {
@@ -98,7 +120,7 @@
                     $indice += 1;
                 }
 
-                echo "<br> Número de alumnos con promedio superior: ".$count."<br>";
+                echo "<br><br> Número de alumnos con promedio superior: ".$count."<br>";
 
 
             }
@@ -108,6 +130,8 @@
             promedioSuperior(promedioGrupalGeneral(promedioAlumno($vector_promedios)), $vector_promedios);
 
             promedioMateria($vector_promedios);
+
+            mejorPromedioAlumno($vector_promedios);
 
 
         ?>
