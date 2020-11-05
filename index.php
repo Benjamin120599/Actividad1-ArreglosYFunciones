@@ -34,6 +34,7 @@
                     $promedio = $promedio + $value;
                 }
                 echo "<br>El promedio general del grupo es: ".$promedio/count($vectorDePromedios)."<br>";
+                return $promedio/count($vectorDePromedios);
             }
 
             function promedioAlumno($vector_promedios) {
@@ -57,7 +58,6 @@
             function promedioMateria($vector_promedios) {
                 $promedio = 0;
                 $indice = 0;
-                //$i = 0;
                 echo "<br> ------------------ Promedio por Materia ------------------ <br>";
 
                 for($i=1; $i<=6; $i++) {
@@ -72,34 +72,40 @@
                     $indice += 1;
                 }
 
-                
-
-               
-
-                /*foreach ($vector_promedios as $nombre => $calif) {
-                    
-                    echo "<br>Promedio de Materia ".$i+=1;
-                    echo ": ";
-                    foreach ($calif as $c) {
-                        $promedio = $promedio + $calif[$i];
-                    }
-                    echo $promedio/6;
-                    $promedio = 0;
-                }*/
-
             }
 
             function mejorPromedioAlumno() {
                 
             }
 
-            function promedioSuperior() {
-                
+            function promedioSuperior($promedioGeneral, $vector) {
+                $count = 0;
+                $indice = 1;
+                $promedio = 0;
+                echo "<br> ------------------ Número de Alumnos con Promedio Superior al General ------------------ <br>";
+                echo "<br>Promedio General: ".$promedioGeneral;
+
+                foreach ($vector as $nombre => $calif) {
+                    foreach ($calif as $c) {
+                        $promedio = $promedio + $c;
+                    }
+                    echo "<br>Alumno ".$indice.": ".$promedio/6;
+
+                    if($promedio/6 > $promedioGeneral) {
+                        $count += 1;
+                    }
+                    $promedio = 0;
+                    $indice += 1;
+                }
+
+                echo "<br> Número de alumnos con promedio superior: ".$count."<br>";
+
+
             }
 
             //promedioAlumno($vector_promedios);
 
-            promedioGrupalGeneral(promedioAlumno($vector_promedios));
+            promedioSuperior(promedioGrupalGeneral(promedioAlumno($vector_promedios)), $vector_promedios);
 
             promedioMateria($vector_promedios);
 
