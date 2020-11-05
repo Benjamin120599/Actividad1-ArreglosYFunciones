@@ -33,7 +33,7 @@
                 foreach ($vectorDePromedios as $value) {
                     $promedio = $promedio + $value;
                 }
-                echo "<br>El promedio general del grupo es: ".$promedio/count($vectorDePromedios);
+                echo "<br>El promedio general del grupo es: ".$promedio/count($vectorDePromedios)."<br>";
             }
 
             function promedioAlumno($vector_promedios) {
@@ -56,17 +56,37 @@
 
             function promedioMateria($vector_promedios) {
                 $promedio = 0;
-                echo " ------------------ Promedio por Materia ------------------ <br>";
+                $indice = 0;
+                //$i = 0;
+                echo "<br> ------------------ Promedio por Materia ------------------ <br>";
 
-                $materia = 0;
-                foreach ($vector_promedios as $nombre => $calif) {
-                    echo "<br>Materia ".$materia.": ";
+                for($i=1; $i<=6; $i++) {
+
+                    foreach ($vector_promedios as $calificaciones) {
+                        $promedio = $promedio + $calificaciones[$indice];
+                    }
+
+                    echo "<br>Promedio de Materia ".$i;
+                    echo ": ".$promedio/10;
+                    $promedio = 0;
+                    $indice += 1;
+                }
+
+                
+
+               
+
+                /*foreach ($vector_promedios as $nombre => $calif) {
+                    
+                    echo "<br>Promedio de Materia ".$i+=1;
+                    echo ": ";
                     foreach ($calif as $c) {
-                        $promedio = $promedio + $c; 
+                        $promedio = $promedio + $calif[$i];
                     }
                     echo $promedio/6;
                     $promedio = 0;
-                }
+                }*/
+
             }
 
             function mejorPromedioAlumno() {
@@ -80,6 +100,8 @@
             //promedioAlumno($vector_promedios);
 
             promedioGrupalGeneral(promedioAlumno($vector_promedios));
+
+            promedioMateria($vector_promedios);
 
 
         ?>
